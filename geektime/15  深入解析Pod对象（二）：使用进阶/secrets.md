@@ -37,3 +37,58 @@ spec:
 
 ```
 test-container 容器的/etc/mysecret目录下会有两个文件 user paas
+
+
+## test-secret-env-pod.yaml
+创建1个pod,将mysecret挂载为环境变量
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-secret-env-pod
+spec:
+  containers:
+  - name: test-container-env
+    image: busybox:1.36          # ← 不存在？K3s 会自动 pull
+    command: ["sleep", "3600"]
+    env:
+    - name: USERNAME
+      valueFrom:
+        secretKeyRef:
+          name: mysecret
+          key: user
+    - name: PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: mysecret
+          key: pass
+  restartPolicy: Never
+
+```
+
+```shell
+进入容器，会看到如下两个环境变量
+USERNAME=admin
+PASSWORD=1f2d1e2e67df
+
+kubectl exec -it test-secret-pod-env -- sh
+/ # 
+/ # env
+KUBERNETES_SERVICE_PORT=443
+KUBERNETES_PORT=tcp://10.43.0.1:443
+HOSTNAME=test-secret-pod-env
+SHLVL=1
+HOME=/root
+USERNAME=admin
+TERM=xterm
+KUBERNETES_PORT_443_TCP_ADDR=10.43.0.1
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+KUBERNETES_PORT_443_TCP_PORT=443
+KUBERNETES_PORT_443_TCP_PROTO=tcp
+KUBERNETES_SERVICE_PORT_HTTPS=443
+KUBERNETES_PORT_443_TCP=tcp://10.43.0.1:443
+KUBERNETES_SERVICE_HOST=10.43.0.1
+PWD=/
+PASSWORD=1f2d1e2e67df
+```
