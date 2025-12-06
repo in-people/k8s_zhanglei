@@ -67,8 +67,8 @@ spec:
 
 ```
 
-```shell
 进入容器，会看到如下两个环境变量
+```shell
 USERNAME=admin
 PASSWORD=1f2d1e2e67df
 
