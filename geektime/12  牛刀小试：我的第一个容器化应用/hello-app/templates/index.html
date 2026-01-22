@@ -1,0 +1,16 @@
+<!doctype html>
+<html>
+<head>
+    <title>Hello App</title>
+</head>
+<body>
+    <h1>请输入你的英文名字：</h1>
+    <form method="post">
+        <input type="text" name="name">
+        <input type="submit" value="提交">
+    </form>
+    {% if message %}
+    <p>{{ message }}</p>
+    {% endif %}
+</body>
+</html>
