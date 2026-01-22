@@ -15,10 +15,10 @@ docker build -t hello-app:latest .
 ## 拉取镜像
 
 ```bash
-docker pull public-docker-virtual.artnj.zte.com.cn/python:3.11-slim
+docker pull ****/python:3.11-slim
 ```
 
-从 artnj 仓库拉取镜像。
+从 **** 仓库拉取镜像。
 
 ## 运行容器
 
