@@ -1,7 +1,7 @@
-FROM public-docker-virtual.artnj.zte.com.cn/python:3.11-slim 
+FROM ****/python:3.11-slim 
 
-ENV http_proxy=http://proxyhk.zte.com.cn:80
-ENV https_proxy=http://proxyhk.zte.com.cn:80
+ENV http_proxy=****
+ENV https_proxy=*****
 
 WORKDIR /app
 COPY . /app
